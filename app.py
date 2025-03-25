@@ -12,7 +12,7 @@ tracer = trace.get_tracer(__name__)
 
 # Configure Azure Monitor exporter
 exporter = AzureMonitorTraceExporter(
-    connection_string="InstrumentationKey=c8e43d86-8f8f-471a-85dc-6190346ee095;IngestionEndpoint=https://centralindia-0.in.applicationinsights.azure.com/;LiveEndpoint=https://centralindia.livediagnostics.monitor.azure.com/;ApplicationId=0d62543e-6d26-4250-af89-121fb76a2042"
+    connection_string="InstrumentationKey=d6ea9e8e-d6c5-40be-8da0-1d10da66e171;IngestionEndpoint=https://centralindia-0.in.applicationinsights.azure.com/;LiveEndpoint=https://centralindia.livediagnostics.monitor.azure.com/;ApplicationId=b1662395-cec3-4793-b3cf-a1fd11088828"
 )
 span_processor = BatchSpanProcessor(exporter)
 trace.get_tracer_provider().add_span_processor(span_processor)
