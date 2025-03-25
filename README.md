@@ -1,18 +1,20 @@
-MyFlaskApp
-Overview
+# MyFlaskApp
+
+## Overview
 MyFlaskApp is a simple web application built using Flask and deployed on Azure App Services. This project demonstrates how to create a basic Flask web app and enable live metrics using Azure Application Insights.
 
-Features
+## Features
 Simple Flask Web App: A basic web application that returns a "Hello, Azure with Live Metrics!" message.
 Azure App Services Deployment: Instructions to deploy the app on Azure App Services.
 Live Metrics with Application Insights: Integration with Azure Application Insights to monitor live metrics.
 Prerequisites
 Python 3.6 or higher
 Azure account
-Setup
+
+## Setup
 Clone the repository:
 
-git clone https://github.com/yourusername/myflaskapp.git
+git clone [https://github.com/yourusername/myflaskapp.git](https://github.com/Yorichi07/myFlaskApp.git)
 cd myflaskapp
 Create a virtual environment and activate it:
 
@@ -30,7 +32,7 @@ Run the Flask app:
 flask run
 Open your browser and navigate to http://127.0.0.1:5000 to see the app in action.
 
-Deploying to Azure App Services
+## Deploying to Azure App Services
 Create a new Web App in the Azure portal.
 Use the Deployment Center to connect your GitHub repository or upload your code directly.
 Ensure the runtime stack is set to Python.
@@ -48,11 +50,11 @@ from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
 app = Flask(__name__)
 
-# Set up OpenTelemetry
+## Set up OpenTelemetry
 trace.set_tracer_provider(TracerProvider())
 tracer = trace.get_tracer(__name__)
 
-# Configure Azure Monitor exporter
+## Configure Azure Monitor exporter
 exporter = AzureMonitorTraceExporter(
     connection_string="InstrumentationKey=YOUR_INSTRUMENTATION_KEY"
 )
@@ -70,9 +72,9 @@ Replace YOUR_INSTRUMENTATION_KEY with your actual Application Insights instrumen
 
 Deploy your updated app to Azure App Services.
 
-Enable live metrics in the Azure portal:
-
+## Enable live metrics in the Azure portal:
 Open your Application Insights resource.
 Select Live Metrics under the Investigate section.
-License
+
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
