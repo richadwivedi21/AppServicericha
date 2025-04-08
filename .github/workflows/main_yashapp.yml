@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Python app to Azure Web App - yashapp
+name: Deploy Python App to Azure Web App
 
 on:
   push:
@@ -10,63 +7,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read # Required for actions/checkout
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.10'  # adjust if needed
 
-      - name: Create and activate virtual environment
+      - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip install -r requirements.txt
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Optional: Add your test steps here if needed
-      # - name: Run tests
-      #   run: pytest
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: python-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+      - name: Zip application
+        run: |
+          zip -r release.zip . -x "venv/*" ".git/*" ".github/*"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
         with:
-          app-name: 'yashapp'  # change this if your app name is different
-          slot-name: 'Production'
+          app-name: 'yashapp'  # Make sure this exactly matches your Azure Web App name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: release.zip
