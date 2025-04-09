@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'yashapp'
           slot-name: 'test'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B391E07928C94DF0B665E1845442951F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F542325E6E80415890BDCC884874735E }}
