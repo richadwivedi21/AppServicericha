@@ -7,4 +7,4 @@ def home():
     return "This is Yashvardhan's Web App. Welcome."
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8000)
